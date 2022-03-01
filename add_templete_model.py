@@ -11,7 +11,6 @@ import os, requests
 import subprocess
 from common import constant
 from src.backbone_query import BackBone
-from src.cypher import Cypher
 
 import hanlp
 from hanlp.components.mtl.multi_task_learning import MultiTaskLearning
@@ -86,7 +85,7 @@ class WeightedTree():
         entity_ids = []
         print(ner)
         for item in ner:
-            optional_entity_list = Cypher.get_entity(item["words"], item["type"])
+            optional_entity_list = self.backbone.get_entity(item["words"], item["type"])
             if optional_entity_list:
                 entity_ids.append({"ner": item["words"], "type": item["type"], "link": optional_entity_list[0]["ID"]})
         print(entity_ids)
@@ -300,5 +299,3 @@ class WeightedTree():
 
 
 qa = WeightedTree()
-
-

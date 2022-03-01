@@ -1,0 +1,6 @@
+name:string:users	name:string:users	type
+Michael	Selina	FATHER_OF
+Michael	Rana	FATHER_OF
+Michael	Selma	FATHER_OF
+Rana	Selma	SISTER_OF
+Selina	Rana	SISTER_OF

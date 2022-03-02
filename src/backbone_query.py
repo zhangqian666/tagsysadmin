@@ -6,7 +6,7 @@ Author: Leiyan
 Date: 2021-05-10 09:40:17
 LastEditTime: 2021-05-28 23:18:21
 '''
-from py2neo import Graph
+from py2neo import Graph, Node
 from common.constant import entity_attribute, entity_main_attribute
 import pymysql  # 导入 pymysql
 import re
@@ -57,14 +57,13 @@ class BackBone():
         return data
 
     def getentitybyid(self, id):
-        sql = "MATCH (n) WHERE ID(n) = {} RETURN n".format(id)
+        sql = "MATCH (n) WHERE ID(n) = {} RETURN labels(n)".format(id)
         result_list = self.excute_cypher(sql)
         print(result_list)
         entities = []
         for index in range(len(result_list)):
             entity = {}
-            entity['labels'] = result_list[index]['n'].labels
-            entity['ID'] = result_list[index]['n'].identity
+            entity['labels'] = result_list[index]
             entities.append(entity)
         print(entities)
         return entities

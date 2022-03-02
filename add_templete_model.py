@@ -57,10 +57,14 @@ class HTTPUtils(object):
         return all_data
 
     def get_ner(self, question):
-
-        result = json.loads(self.__ner_request(question))
-        return self.__handle_ner_data(question,
-                                      result)
+        try:
+            result = json.loads(self.__ner_request(question))
+            ner = self.__handle_ner_data(question,
+                                         result)
+        except Exception as e:
+            print(e)
+            return []
+        return ner
 
 
 class WeightedTree():

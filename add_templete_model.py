@@ -211,39 +211,11 @@ class WeightedTree():
         weighted_tree += consistency_tree[index:len(consistency_tree)]
         return weighted_tree
 
-    def standard_input_file(self, weighted_tree, existed_trees):
-        pairs = []
-        for tree in existed_trees:
-            one_pair = "|BT| " + weighted_tree + " |BT| " + tree + " |ET|"
-            pairs.append(one_pair)
-        constant.save_data(constant.final_input_path, pairs, flag=True)
-
-    def save_weighted_tree(self):
-        questions = constant.read_data(constant.question_path, flag=True)
-        weighted_trees = []
-        for question in questions:
-            weighted_tree = self.get_weighted_tree(question)
-            weighted_trees.append(weighted_tree)
-            entity_ids, ans_ids, ans_attrs = self.add_id_to_json(question)
-            self.content_json.append(
-                {"question": question, "tree": weighted_tree, "entity_ids": entity_ids, "ans_ids": ans_ids,
-                 "ans_attrs": ans_attrs})
-        constant.save_data(constant.add_weight_trees_path, weighted_trees, flag=True)
-
-    def read_weighted_tree(self):
-        existed_trees = constant.read_data(constant.add_weight_trees_path, flag=True)
-        return existed_trees
-
     def get_weighted_tree(self, query):
         consistency_tree = self.generate_consistency_tree(query)
         consistency_tree = self.deal_tree_line(consistency_tree)
         weighted_tree = self.add_weight_to_tree(consistency_tree)
         return weighted_tree
-
-    def constrcut_two_pairs(self, query):
-        weighted_tree = self.get_weighted_tree(query)
-        existed_trees = self.read_weighted_tree()
-        self.standard_input_file(weighted_tree, existed_trees)
 
     def input_entitiy_link_data(self, context):
         input_contexts = []
@@ -254,7 +226,6 @@ class WeightedTree():
         return input_contexts
 
     def add_id_to_json(self, question):
-        print(question)
         entity_ids = self.input_entitiy_link_data("实体id: ")
         ans_ids = self.input_entitiy_link_data("答案id: ")
         ans_attrs = self.input_entitiy_link_data("答案attribute: ")
@@ -267,47 +238,22 @@ class WeightedTree():
     def save_template(self):
         constant.save_data(constant.json_path, {"data": self.content_json}, flag=True, isjson=True)
 
-    def add_cypher_to_json(self):
-        self.save_weighted_tree()
-        # self.constrcut_two_pairs(question)
-        for data in self.content_json:
-            cypher = self.generate_cypher(data['entity_ids'], data['ans_ids'])
-            data['cypher'] = cypher
-            print("cypher:", cypher)
-        self.save_template()
-
     def add_question_to_db(self, question_data):
-        print(question_data)
         cypher = self.generate_cypher(question_data['entity_ids'], question_data['ans_ids'])
+        if cypher is None:
+            return
         tree = self.get_weighted_tree(question_data['question'])
         question_data['cypher'] = cypher
         question_data['tree'] = tree
         constant.append_data(constant.add_weight_trees_path, tree, flag=True)
         self.content_json.append(question_data)
         self.save_template()
-        print(question_data)
+        print("save end : {}".format(question_data))
         return question_data
-
-    def add_template(self, question, answer):
-        entity_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(question)]
-        ans_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(answer)]
-        ans_attrs = [item['type'].lower() + "Name" for item in self.link_entity_ids_by_line(answer)]
-        question_data = {"question": question, "entity_ids": entity_ids, "answer": answer, "ans_ids": ans_ids,
-                         "ans_attr:": ans_attrs}
-        return self.add_question_to_db(question_data)
 
     def load_template(self):
         self.content_json = constant.read_data(constant.json_path, isjson=True)['data']
         return self.content_json
-
-    def rank_template(self):
-        print("----exec")
-        ret = subprocess.run(["/Users/zhangqian/tagsysadmin/src/rank.sh"])
-        print("ret: ", ret)
-        rank_template = constant.read_data(constant.score_path, flag=True)
-        index = rank_template.index(max(rank_template))
-        print("index:", index)
-        return index
 
     def add_template_by_ner(self, question, answer):
         entity_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(question)]

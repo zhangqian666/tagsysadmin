@@ -24,7 +24,8 @@ entity_attribute = {
     "Genre": "genreName",
     "People": "peopleName",
     "Location": "locationName",
-    "Dynasty": "dynastyName"
+    "Dynasty": "dynastyName",
+    "Others": "other"
 }
 
 entity_main_attribute = {

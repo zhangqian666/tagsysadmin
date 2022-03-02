@@ -91,6 +91,8 @@ class WeightedTree():
         entity_ids = []
         print(ner)
         for item in ner:
+            if item["type"] == "Others":
+                return []
             if item["type"] == "Verse":
                 words = item["words"].split("，")
                 for word in words:

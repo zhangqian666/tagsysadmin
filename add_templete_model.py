@@ -7,7 +7,7 @@
 
 @Created on: 2022/3/1 下午2:33
 """
-import os, requests
+import os, requests, json
 import subprocess
 from common import constant
 from src.backbone_query import BackBone
@@ -57,8 +57,10 @@ class HTTPUtils(object):
         return all_data
 
     def get_ner(self, question):
+
+        result = json.loads(self.__ner_request(question))
         return self.__handle_ner_data(question,
-                                      self.__ner_request(question))
+                                      result)
 
 
 class WeightedTree():

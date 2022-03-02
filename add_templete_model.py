@@ -91,9 +91,23 @@ class WeightedTree():
         entity_ids = []
         print(ner)
         for item in ner:
-            optional_entity_list = self.backbone.get_entity(item["words"], item["type"])
-            if optional_entity_list:
-                entity_ids.append({"ner": item["words"], "type": item["type"], "link": optional_entity_list[0]})
+            if item["type"] == "Verse":
+                words = item["words"].split("，")
+                for word in words:
+                    word = word.replace("”", "")
+                    word = word.replace("。", "")
+                    word = word.replace("“", "")
+                    optional_entity_list = self.backbone.get_entity(word, item["type"])
+                    if optional_entity_list:
+                        entity_ids.append({"ner": word, "type": item["type"], "link": optional_entity_list[0]})
+            else:
+                word = item["words"]
+                word = word.replace("”", "")
+                word = word.replace("。", "")
+                word = word.replace("“", "")
+                optional_entity_list = self.backbone.get_entity(word, item["type"])
+                if optional_entity_list:
+                    entity_ids.append({"ner": word, "type": item["type"], "link": optional_entity_list[0]})
         print(entity_ids)
         return entity_ids
 

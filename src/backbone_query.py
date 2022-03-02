@@ -57,7 +57,7 @@ class BackBone():
         return data
 
     def getentitybyid(self, id):
-        sql = "MATCH (s) WHERE ID(s) = {} RETURN s".format(id)
+        sql = "MATCH (n) WHERE ID(n) = {} RETURN n".format(id)
         result_list = self.excute_cypher(sql)
         entities = []
         for index in range(len(result_list)):

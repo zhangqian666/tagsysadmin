@@ -66,6 +66,9 @@ class HTTPUtils(object):
             return []
         return ner
 
+    def get_ner_by_id(self, sentence):
+        pass
+
 
 class WeightedTree():
     def __init__(self):
@@ -85,6 +88,13 @@ class WeightedTree():
         tree = tree.replace('\t', '')
         tree = ' '.join(tree.split())
         return tree
+
+    def link_entity_ids_by_id(self, answerid):
+        entity_ids = []
+        optional_entity_list = self.backbone.getentitybyid(answerid)
+        if optional_entity_list:
+            entity_ids.append({"type": optional_entity_list[0]["labels"]})
+        return entity_ids
 
     def link_entity_ids_by_line(self, sentence):
         ner = self.http_utils.get_ner(sentence)
@@ -257,10 +267,10 @@ class WeightedTree():
         self.content_json = constant.read_data(constant.json_path, isjson=True)['data']
         return self.content_json
 
-    def add_template_by_ner(self, question, answer):
+    def add_template_by_ner(self, question, answer, answerid):
         entity_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(question)]
-        ans_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(answer)]
-        ans_attrs = [item['type'].lower() + "Name" for item in self.link_entity_ids_by_line(answer)]
+        ans_ids = [int(answerid)]
+        ans_attrs = [item['type'].lower() + "Name" for item in self.link_entity_ids_by_id(answerid)]
         question_data = {"question": question, "entity_ids": entity_ids, "answer": answer, "ans_ids": ans_ids,
                          "ans_attr:": ans_attrs}
         if len(entity_ids) == 0 or len(ans_ids) == 0 or len(ans_attrs) == 0:

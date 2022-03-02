@@ -56,6 +56,17 @@ class BackBone():
         data = self.graph.run(cypher).data()
         return data
 
+    def getentitybyid(self, id):
+        sql = "MATCH (s) WHERE ID(s) = {} RETURN s".format(id)
+        result_list = self.excute_cypher(sql)
+        entities = []
+        for index in range(len(result_list)):
+            entity = {}
+            entity['labels'] = result_list[index]['n'].labels
+            entity['ID'] = result_list[index]['n'].identity
+            entities.append(entity)
+        return entities
+
     def get_entity(self, context, ner):
         sql = "Match (n: {entity_ner}) where n.{entity_attr} = '{entity_context}' return n".format(
             entity_ner=ner,

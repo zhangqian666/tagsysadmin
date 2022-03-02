@@ -63,7 +63,7 @@ class BackBone():
         entities = []
         for index in range(len(result_list)):
             entity = {}
-            entity['labels'] = result_list[index]
+            entity['labels'] = result_list[index]["labels(n)"][0]
             entities.append(entity)
         print(entities)
         return entities

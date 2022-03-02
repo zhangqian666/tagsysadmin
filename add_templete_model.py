@@ -94,6 +94,7 @@ class WeightedTree():
         optional_entity_list = self.backbone.getentitybyid(answerid)
         if optional_entity_list:
             entity_ids.append({"type": optional_entity_list[0]["labels"]})
+        print(entity_ids)
         return entity_ids
 
     def link_entity_ids_by_line(self, sentence):

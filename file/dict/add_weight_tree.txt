@@ -1,0 +1,2 @@
+(TOP (IP (NP (NR People:0.4)) (VP (VC 是:0.01) (NP (DNP (NP (DP (DT 哪个:0.01)) (NP (NN 朝代:0.3))) (DEG 的:0.01)))) (PU ？:0.01)))
+(TOP (IP (NP (DNP (NP (IP (PU “) (VP (VV Verse:0.4)) (PU ”:0.01)) (NP (NN 诗句:0.3))) (DEG 的:0.01)) (NP (NN 作者:0.3))) (VP (VC 是:0.01)) (PU ？:0.01)))

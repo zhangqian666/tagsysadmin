@@ -1,9 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/dataSources.local.xml
 .idea/dataSources/
-file/
 src/__pycache__/backbone_query.cpython-38.pyc
-src/backbone_query.py
-src/rank.sh
 template.json
 utils/__pycache__/user.cpython-38.pyc

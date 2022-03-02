@@ -2,17 +2,8 @@
 .idea/dataSources.local.xml
 .idea/dataSources/
 file/
-src/Location.txt
-src/People.txt
-src/Poetry.txt
-src/Poetrything.txt
 src/__pycache__/backbone_query.cpython-38.pyc
-src/__pycache__/weighted_tree.cpython-38.pyc
-src/add_weight_tree.txt
 src/backbone_query.py
-src/file/
 src/rank.sh
-src/score.txt
 template.json
-utils/__pycache__/test.cpython-38.pyc
 utils/__pycache__/user.cpython-38.pyc

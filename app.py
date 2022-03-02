@@ -7,6 +7,7 @@ from src.mysql_manager import MysqlManager
 from src.get_attr_and_relation import get_option_relation, predict_second_entity
 from utils.mysql import OperationMysql
 from settings import conf
+from test import updateMysqlStatus
 from utils.user import getUserPoetryDetails
 from src.weighted_tree import qa
 
@@ -24,6 +25,11 @@ model = AutoModel.from_pretrained("SIKU-BERT/sikubert")
 # app.config.from_object(conf["pro"])
 # bp = Blueprint("test", __name__, url_prefix='/')
 # app.register_blueprint(bp, url_prefix='/')
+
+@app.route('/1', methods=['GET'])
+def hello():
+    updateMysqlStatus()
+    return "nihao"
 
 
 @app.route('/entity', methods=['GET'])

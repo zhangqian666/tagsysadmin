@@ -40,7 +40,7 @@ class HTTPUtils(object):
             label = item[i]
             option = label.split("-")[0]
             if option == "B" or option == "O":
-                if seq is not "":
+                if seq != "":
                     all_data.append({
                         "words": seq,
                         "type": item[i - 1].split("-")[1]
@@ -48,7 +48,7 @@ class HTTPUtils(object):
                     seq = ""
             if option == "B" or option == "I":
                 seq += seg_list[i]
-        if seq is not "":
+        if seq != "":
             all_data.append({
                 "words": seq,
                 "type": item[-1].split("-")[1]
@@ -56,7 +56,6 @@ class HTTPUtils(object):
         return all_data
 
     def get_ner(self, question):
-
         return self.__handle_ner_data(
             self.__ner_request(question))
 

@@ -11,7 +11,7 @@
 from add_templete_model import qa
 import json
 
-with open("./question_answer_data.txt", encoding="utf-8", mode="r") as f:
+with open(".src/question_answer_data.txt", encoding="utf-8", mode="r") as f:
     for i in f.readlines():
         line = json.loads(i)
         print("{} {}".format(line["question"], line["answer"]))

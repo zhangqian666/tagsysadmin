@@ -22,7 +22,7 @@ class BackBone():
         self.ans_id_to_namae_map = {}
 
     def get_graph(self):
-        graph = Graph("http://172.18.0.4:7474/", auth=("neo4j", "123456"))
+        graph = Graph("http://172.17.0.4:7474/", auth=("neo4j", "123456"))
         return graph
 
     def update_verseBelongTo_reverse(self):

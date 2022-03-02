@@ -270,7 +270,7 @@ class WeightedTree():
 
     def add_template_by_ner(self, question, answer, answerid):
         entity_ids = [str(item['link']['ID']) for item in self.link_entity_ids_by_line(question)]
-        ans_ids = [int(answerid)]
+        ans_ids = [answerid]
         ans_attrs = [item['type'].lower() + "Name" for item in self.link_entity_ids_by_id(answerid)]
         question_data = {"question": question, "entity_ids": entity_ids, "answer": answer, "ans_ids": ans_ids,
                          "ans_attr:": ans_attrs}

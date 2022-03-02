@@ -297,6 +297,8 @@ class WeightedTree():
         ans_attrs = [item['type'].lower() + "Name" for item in self.link_entity_ids_by_line(answer)]
         question_data = {"question": question, "entity_ids": entity_ids, "answer": answer, "ans_ids": ans_ids,
                          "ans_attr:": ans_attrs}
+        if len(entity_ids) == 0 | len(ans_ids) == 0 | len(ans_attrs) == 0:
+            return
         return self.add_question_to_db(question_data)
 
 

@@ -32,6 +32,7 @@ class HTTPUtils(object):
         return requests.get(ner_url, params=body).content.decode()
 
     def __handle_ner_data(self, question, result):
+        print(result)
         all_data = []
         item = result["data"]["data"]["ver"][0]
         seq = ""

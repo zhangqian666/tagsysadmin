@@ -89,7 +89,7 @@ class WeightedTree():
         for item in ner:
             optional_entity_list = self.backbone.get_entity(item["words"], item["type"])
             if optional_entity_list:
-                entity_ids.append({"ner": item["words"], "type": item["type"], "link": optional_entity_list[0]["ID"]})
+                entity_ids.append({"ner": item["words"], "type": item["type"], "link": optional_entity_list[0]})
         print(entity_ids)
         return entity_ids
 

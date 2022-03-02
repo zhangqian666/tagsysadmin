@@ -56,8 +56,8 @@ class HTTPUtils(object):
         return all_data
 
     def get_ner(self, question):
-        return self.__handle_ner_data(
-            self.__ner_request(question))
+        return self.__handle_ner_data(question,
+                                      self.__ner_request(question))
 
 
 class WeightedTree():

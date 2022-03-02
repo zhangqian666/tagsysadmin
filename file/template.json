@@ -1,0 +1,46 @@
+{
+    "data": [
+        {
+            "question": "杜甫是哪个朝代的？",
+            "tree": "(TOP (IP (NP (NR People:0.4)) (VP (VC 是:0.01) (NP (DNP (NP (DP (DT 哪个:0.01)) (NP (NN 朝代:0.3))) (DEG 的:0.01)))) (PU ？:0.01)))",
+            "entity_ids": [
+                "264831"
+            ],
+            "ans_ids": [
+                "266501"
+            ],
+            "ans_attrs": [
+                "dynastyName"
+            ],
+            "cypher": "(ans)<-[:peopleBelongDynastyTo {}]-(ent_0)"
+        },
+        {
+            "question": "“每逢佳节倍思亲”诗句的作者是？",
+            "entity_ids": [
+                "2601"
+            ],
+            "ans_ids": [
+                "264835"
+            ],
+            "ans_attrs": [
+                "peopleName"
+            ],
+            "cypher": "(ans)<-[:verseBelongToPeople {}]-(ent_0)",
+            "tree": "(TOP (IP (NP (DNP (NP (IP (PU “) (VP (VV Verse:0.4)) (PU ”:0.01)) (NP (NN 诗句:0.3))) (DEG 的:0.01)) (NP (NN 作者:0.3))) (VP (VC 是:0.01)) (PU ？:0.01)))"
+        },
+        {
+            "question": "“每逢佳节倍思亲”诗句的上一句是？",
+            "entity_ids": [
+                "2601"
+            ],
+            "ans_ids": [
+                "2600"
+            ],
+            "ans_attrs": [
+                "verseContext"
+            ],
+            "cypher": "(ent_0)<-[:verseBeforeTo {}]-(ans)",
+            "tree": "(TOP (IP (DNP (NP (IP (PU “) (IP (VP (VV Verse:0.4))) (PU ”:0.01)) (NP (NN 诗句:0.3))) (DEG 的:0.01)) (DP (DT 上:0.01) (QP (CD 一:0.01) (CLP (M 句:0.01)))) (VP (VC 是:0.01)) (PU ？:0.01)))"
+        }
+    ]
+}

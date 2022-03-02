@@ -2,5 +2,4 @@
 .idea/dataSources.local.xml
 .idea/dataSources/
 src/__pycache__/backbone_query.cpython-38.pyc
-template.json
 utils/__pycache__/user.cpython-38.pyc
